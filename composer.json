@@ -1,0 +1,25 @@
+{
+    "name": "giovanipatrick/trackbackapi",
+    "description": "Consumo da API de Rastreamento Link Track",
+    "type": "project",
+    "require": {
+        "pecee/simple-router": "4.3.7.2",
+        "vlucas/phpdotenv": "^5.4"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Giovanipatrick\\Trackbackapi\\": "src/"
+        },
+        "files":[
+            "src/Routes/Routes.php",
+            "src/App/Methods/ConvertEnv.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Giovani Patrick",
+            "email": "giovani.ks@hotmail.com"
+        }
+    ]
+}
