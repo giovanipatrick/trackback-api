@@ -15,7 +15,6 @@ class Listening extends SimpleRouter{
 
             SimpleRouter::form('/rastreamento/getInformations/{id_objeto}',function($codigo_objeto){
                 require 'src/App/Http/Controllers/TrackBackController.php';
-                echo AjaxMessage::return('success',"O código do objeto rastreado é $codigo_objeto");
             });
 
             SimpleRouter::error(function(){
