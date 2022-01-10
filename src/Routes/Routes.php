@@ -3,17 +3,23 @@
 namespace App\Routes;
 
 use Pecee\SimpleRouter\SimpleRouter;
+use App\Methods\AjaxMessage;
+
 
 class Listening extends SimpleRouter{
 
         public static function Initiliaze(){
-
             SimpleRouter::get('/rastreamento/',function(){
-               echo $_ENV['BASE_URL'].$_ENV['OBLIGATORY_PARAMS'];
+               echo AjaxMessage::return('error','Os parametros informados são inválidos, verifique a documentação!');
+            });
+
+            SimpleRouter::form('/rastreamento/getInformations/{id_objeto}',function($codigo_objeto){
+                require 'src/App/Http/Controllers/TrackBackController.php';
+                echo AjaxMessage::return('success',"O código do objeto rastreado é $codigo_objeto");
             });
 
             SimpleRouter::error(function(){
-                echo 'ERRO 404';
+                echo AjaxMessage::return('error','Os parametros informados são inválidos, verifique a documentação!');
             });
 
             SimpleRouter::start();

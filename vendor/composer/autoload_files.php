@@ -11,4 +11,6 @@ return array(
     'a4a119a56e50fbb293281d9a48007e0e' => $vendorDir . '/symfony/polyfill-php80/bootstrap.php',
     'cf3229cb118a72c17d267c45b5e96670' => $baseDir . '/src/Routes/Routes.php',
     'cc2a53633afde94836c92eb3a01ba872' => $baseDir . '/src/App/Methods/ConvertEnv.php',
+    '04ced6aa3f5475a84c027837a57412c3' => $baseDir . '/src/App/DTO/TrackBackDTO.php',
+    '48cc80bd1d82a41898f87a5ded49142b' => $baseDir . '/src/App/Methods/AjaxMessage.php',
 );
