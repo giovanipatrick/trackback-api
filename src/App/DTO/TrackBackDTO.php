@@ -10,9 +10,12 @@
         private $uri;
         private $request;
         private $values;
+        private $gContext;
+        private $gRequest;
+        private $gResponse;
 
         public function setBaseURL(){
-            $this->base_url = $_ENV['BASE_URL'];
+            $this->base_url = 'https://proxyapp.correios.com.br/';
         }
 
         public function getBaseURL(){
@@ -21,7 +24,7 @@
         }
 
         public function setParams(){
-            $this->params = $_ENV['OBLIGATORY_PARAMS'];
+            $this->params = 'v1/sro-rastro/';
         }
 
         public function getParams(){
@@ -60,6 +63,28 @@
 
         public function getValueRequest(){
             return $this->values;
+        }
+
+        public function setContext(){
+            $this->gContext = array(
+                "ssl"=>array(
+                    "verify_peer"=>false,
+                    "verify_peer_name"=>false,
+                ),
+            );  
+        }
+
+        public function getContext(){
+            $this->setContext();
+            return $this->gContext;
+        }
+
+        public function setGRequest($url){
+            $this->gRequest = file_get_contents("$url",false,stream_context_create($this->getContext()));
+        }
+
+        public function getGRequest(){
+            return $this->gRequest;
         }
 
 

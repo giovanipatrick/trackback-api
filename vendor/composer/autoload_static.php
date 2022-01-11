@@ -14,6 +14,7 @@ class ComposerStaticInit5ae9021fba2972c9f8b58b36818b64e2
         'cc2a53633afde94836c92eb3a01ba872' => __DIR__ . '/../..' . '/src/App/Methods/ConvertEnv.php',
         '04ced6aa3f5475a84c027837a57412c3' => __DIR__ . '/../..' . '/src/App/DTO/TrackBackDTO.php',
         '48cc80bd1d82a41898f87a5ded49142b' => __DIR__ . '/../..' . '/src/App/Methods/AjaxMessage.php',
+        '6b2952748cb49c8211d3368a44a402fa' => __DIR__ . '/../..' . '/src/App/Http/Controllers/TrackBackController.php',
     );
 
     public static $prefixLengthsPsr4 = array (

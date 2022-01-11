@@ -9,6 +9,7 @@ use App\Methods\AjaxMessage;
 class Listening extends SimpleRouter{
 
         public static function Initiliaze(){
+            
             SimpleRouter::get('/rastreamento/',function(){
                echo AjaxMessage::return('error','Os parametros informados são inválidos, verifique a documentação!');
             });
