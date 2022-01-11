@@ -64,6 +64,9 @@
                 return $this->objeto;
             }
 
+            /* 
+            Aguarda a ACTION que é enviada via POST ou GET e encaminha-a para a o metódo específico
+            */
             public function awaitAnAction(){
                     switch($this->getRequest()[2]){
                         case 'getInformations':
