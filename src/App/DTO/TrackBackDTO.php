@@ -12,7 +12,12 @@
         private $values;
         private $gContext;
         private $gRequest;
-        private $gResponse;
+        private $descricao;
+        private $data_criado;
+        private $cidade;
+        private $uf;
+        private $tipo;
+
 
         public function setBaseURL(){
             $this->base_url = 'https://proxyapp.correios.com.br/';
@@ -86,6 +91,50 @@
         public function getGRequest(){
             return $this->gRequest;
         }
+
+        public function setDescricao($descricao){
+            $this->descricao = $descricao;
+        }
+
+        public function getDescricao(){
+            return $this->descricao;
+        }
+
+        public function setDataCriado($data_criado){
+            $this->data_criado = $data_criado;
+        }
+
+        public function getDataCriado(){
+            return $this->data_criado;
+        }
+
+        public function setCidade($cidade){
+            $this->cidade = $cidade;
+        }
+
+        public function getCidade(){
+            return $this->cidade;
+        }
+
+        public function setUF($uf){
+            $this->uf = $uf;
+        }
+
+        public function getUF(){
+            return $this->uf;
+        }
+
+        public function setTipo($tipo){
+            $this->tipo = $tipo;
+        }
+
+        public function getTipo(){
+            return $this->tipo;
+        }
+        
+
+        
+        
 
 
 
