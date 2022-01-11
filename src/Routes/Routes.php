@@ -14,7 +14,11 @@ class Listening extends SimpleRouter{
                echo AjaxMessage::return('error','Os parametros informados são inválidos, verifique a documentação!');
             });
 
-            SimpleRouter::form('/rastreamento/getInformations/{id_objeto}',function($codigo_objeto){
+            SimpleRouter::post('/rastreamento/getInformations/',function(){
+                require 'src/App/Http/Controllers/TrackBackController.php';
+            });
+
+            SimpleRouter::get('/rastreamento/getInformations/{id_objeto}',function($codigo_objeto){
                 require 'src/App/Http/Controllers/TrackBackController.php';
             });
 

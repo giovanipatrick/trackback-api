@@ -2,6 +2,7 @@
 
     use App\Methods\AjaxMessage;
     use App\DTO\TrackBackDTO;
+    use App\Http\Middlewares\TrackBackMiddleware;
 
     class TrackBackController extends TrackBackDTO{
 
@@ -15,7 +16,7 @@
                 $this->request = explode('/',$this->getURI());
                 $this->post_request[2] = filter_input(INPUT_POST,'action',FILTER_SANITIZE_STRING);
                 $this->post_request[3] = filter_input(INPUT_POST,'valor',FILTER_SANITIZE_STRING);
-                $this->request = !empty($this->request[2]) ? $this->request : $this->post_request;
+                $this->request = !empty($this->request[3]) ? $this->request : $this->post_request;
                 $this->setRequest($this->request);
                 $this->setValueRequest($this->request[3]);
             }
@@ -66,7 +67,9 @@
             public function awaitAnAction(){
                     switch($this->getRequest()[2]){
                         case 'getInformations':
-                            $data = &$this->getInformations($this->getValueRequest());
+                            $session['VFX'] = 'teste';
+                            if(TrackBackMiddleware::isAuthorized(base64_encode('webcontrol/mocabonita'),$session)){
+                                $data = &$this->getInformations($this->getValueRequest());
                                 if($data){
                                     if(!$this->verifyThisData($data)){
                                         echo AjaxMessage::return('success',$this->formatJsonData($data));
@@ -76,6 +79,9 @@
                                 }else{
                                     echo AjaxMessage::return('error','A consulta na API dos Correios não retornou dados!');
                                 }
+                            }else{
+                                echo AjaxMessage::return('error','Não foi possível realizar a autenticação na API!');
+                            }
                         break;
                     }
             }
