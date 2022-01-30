@@ -1,5 +1,7 @@
 <?php
 
+    namespace App\Http\Controllers;
+
     use App\Methods\AjaxMessage;
     use App\DTO\TrackBackDTO;
     use App\Http\Middlewares\TrackBackMiddleware;
@@ -7,6 +9,35 @@
     class TrackBackController extends TrackBackDTO{
 
             private $objeto;
+
+            /* 
+            Aguarda a ACTION que é enviada via POST ou GET e encaminha-a para a o metódo específico
+            */
+            public function index(){
+                switch($this->getRequest()[2]){
+                    case 'getInformations':
+                        $session['VFX'] = 'teste';
+                        if(TrackBackMiddleware::isAuthorized(base64_encode('webcontrol/mocabonita'),$session)){
+                            $data = &$this->getInformations($this->getValueRequest());
+                            if($data){
+                                if(!$this->verifyThisData($data)){
+                                    echo AjaxMessage::return('success',$this->formatJsonData($data));
+                                }else{
+                                    echo AjaxMessage::return('error',$this->verifyThisData($data));
+                                }
+                            }else{
+                                echo AjaxMessage::return('error','A consulta na API dos Correios não retornou dados!');
+                            }
+                        }else{
+                            echo AjaxMessage::return('error','Não foi possível realizar a autenticação na API!');
+                        }
+                    break;
+                }
+            }
+
+            public function error(){
+                echo AjaxMessage::return('error','Os parametros informados são inválidos, verifique a documentação!');
+            }
             
             /* 
             Set dos atributos obrigatórios do Controller 
@@ -64,32 +95,5 @@
                 return $this->objeto;
             }
 
-            /* 
-            Aguarda a ACTION que é enviada via POST ou GET e encaminha-a para a o metódo específico
-            */
-            public function awaitAnAction(){
-                    switch($this->getRequest()[2]){
-                        case 'getInformations':
-                            $session['VFX'] = 'teste';
-                            if(TrackBackMiddleware::isAuthorized(base64_encode('webcontrol/mocabonita'),$session)){
-                                $data = &$this->getInformations($this->getValueRequest());
-                                if($data){
-                                    if(!$this->verifyThisData($data)){
-                                        echo AjaxMessage::return('success',$this->formatJsonData($data));
-                                    }else{
-                                        echo AjaxMessage::return('error',$this->verifyThisData($data));
-                                    }
-                                }else{
-                                    echo AjaxMessage::return('error','A consulta na API dos Correios não retornou dados!');
-                                }
-                            }else{
-                                echo AjaxMessage::return('error','Não foi possível realizar a autenticação na API!');
-                            }
-                        break;
-                    }
-            }
-
     }
 
-    $TrackBackController = new TrackBackController;
-    $TrackBackController->awaitAnAction();

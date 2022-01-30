@@ -16,7 +16,8 @@
             "src/App/Methods/ConvertEnv.php",
             "src/App/DTO/TrackBackDTO.php",
             "src/App/Methods/AjaxMessage.php",
-            "src/App/Http/Middlewares/TrackBackMiddleware.php"
+            "src/App/Http/Middlewares/TrackBackMiddleware.php",
+            "src/App/Http/Controllers/TrackBackController.php"
         ]
     },
     "authors": [
