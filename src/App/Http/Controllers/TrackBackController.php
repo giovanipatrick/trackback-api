@@ -80,19 +80,23 @@
             public function formatJsonData($data){
                 $this->objeto = $data;
                 $this->objeto = json_decode($data,true);
-                $this->setDescricao($this->objeto['objetos'][0]['eventos'][0]['descricao']);
-                $this->setDataCriado($this->objeto['objetos'][0]['eventos'][0]['dtHrCriado']);
-                $this->setCidade($this->objeto['objetos'][0]['eventos'][0]['unidade']['endereco']['cidade']);
-                $this->setUF($this->objeto['objetos'][0]['eventos'][0]['unidade']['endereco']['uf']);
-                $this->setTipo($this->objeto['objetos'][0]['eventos'][0]['unidade']['tipo']);
-                $this->objeto = array(
-                    "descricao"=>$this->getDescricao(),
-                    "data_criado"=>$this->getDataCriado(),
-                    "cidade"=>$this->getCidade(),
-                    "uf"=>$this->getUF(),
-                    "tipo"=>$this->getTipo()
-                );
-                return $this->objeto;
+                foreach($this->objeto['objetos'] as $objetos){
+                    foreach($objetos['eventos'] as $key => $value){
+                        $this->setDescricao($objetos['eventos'][$key]['descricao']);
+                        $this->setDataCriado($objetos['eventos'][$key]['dtHrCriado']);
+                        $this->setCidade($objetos['eventos'][$key]['unidade']['endereco']['cidade']);
+                        $this->setUF($objetos['eventos'][$key]['unidade']['endereco']['uf']);
+                        $this->setTipo($objetos['eventos'][$key]['unidade']['tipo']);
+                        $this->objeto['rastreio'][$key] = array(
+                            "descricao"=>$this->getDescricao(),
+                            "data_criado"=>$this->getDataCriado(),
+                            "cidade"=>$this->getCidade(),
+                            "uf"=>$this->getUF(),
+                            "tipo"=>$this->getTipo()
+                        );
+                    }
+                }
+                return $this->objeto['rastreio'];
             }
 
     }
